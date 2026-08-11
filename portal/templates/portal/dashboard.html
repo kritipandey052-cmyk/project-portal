@@ -1,0 +1,62 @@
+{% extends 'portal/base.html' %}
+{% block content %}
+<div class="row gy-3">
+    <div class="col-12 mb-3">
+        <div class="card p-3">
+            <h3>Project Dashboard</h3>
+            <p class="text-muted">Material, manpower, DPR and expense overview.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card p-3 text-center">
+            <h6>Total Material Issued</h6>
+            <h3>{{ total_material_issued }}</h3>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card p-3 text-center">
+            <h6>Total Material Consumed</h6>
+            <h3>{{ total_material_consumed }}</h3>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card p-3 text-center">
+            <h6>Total Material Remaining</h6>
+            <h3>{{ total_material_remaining }}</h3>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card p-3 text-center">
+            <h6>Total Expenses</h6>
+            <h3>₹{{ total_expenses }}</h3>
+        </div>
+    </div>
+    <div class="col-12 mt-4">
+        <div class="card p-3">
+            <h5>Daily Performance</h5>
+            <canvas id="performanceChart" height="120"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+const chartData = {{ daily_performance|safe }};
+const ctx = document.getElementById('performanceChart');
+if (ctx) {
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [
+                { label: 'RFC', data: chartData.rfc, backgroundColor: '#198754' },
+                { label: 'NG', data: chartData.ng, backgroundColor: '#0dcaf0' },
+                { label: 'TF', data: chartData.tf, backgroundColor: '#ffc107' },
+                { label: 'GI', data: chartData.gi, backgroundColor: '#dc3545' }
+            ]
+        },
+        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
+}
+</script>
+{% endblock %}
