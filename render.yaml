@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: project-portal
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn dashboard_portal.wsgi
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: "3.9.19"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        scope: run
+      - key: CSRF_TRUSTED_ORIGINS
+        scope: run
+
+  - type: pserv
+    name: project-portal-db
+    plan: free
+    ipAddress:
+      scope: private
