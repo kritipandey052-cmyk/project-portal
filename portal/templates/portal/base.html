@@ -20,6 +20,18 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Material Management Portal</a>
+
+        <div class="d-flex">
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-success">Register</a>
+            {% endif %}
+        </div>
     </div>
 </nav>
 <div class="container-fluid mt-4">
