@@ -1,39 +1,46 @@
 {% extends 'portal/base.html' %}
+{% load static %}
 {% block content %}
 <div class="row gy-3">
     <div class="col-12 mb-3">
         <div class="card p-3">
-            <h3>Project Dashboard</h3>
-            <p class="text-muted">Material, manpower, DPR and expense overview.</p>
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <img src="{% static 'portal/logo.svg' %}" alt="MEP DREAM CONSTRUCTION logo" style="width: 58px; height: 58px; border-radius: 14px; background: linear-gradient(135deg, #eef5ff 0%, #dfeeff 100%); padding: 8px; box-shadow: 0 8px 18px rgba(13,45,92,0.10);">
+                <div>
+                    <h3 class="mb-1" style="color: var(--navy); font-weight: 800;">MEP DREAM CONSTRUCTION</h3>
+                    <p class="text-muted mb-0">Material, manpower, DPR and expense overview.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card p-3 text-center" style="background: linear-gradient(135deg, #eaf6ff 0%, #ffffff 100%);">
+            <h6 class="text-uppercase" style="color: var(--muted); letter-spacing: 0.6px;">Total Material Issued</h6>
+            <h3 style="color: var(--navy); font-weight: 800; margin-top: 0.5rem;">{{ total_material_issued }}</h3>
         </div>
     </div>
     <div class="col-md-6 col-xl-3">
-        <div class="card p-3 text-center">
-            <h6>Total Material Issued</h6>
-            <h3>{{ total_material_issued }}</h3>
+        <div class="card p-3 text-center" style="background: linear-gradient(135deg, #edfdf7 0%, #ffffff 100%);">
+            <h6 class="text-uppercase" style="color: var(--muted); letter-spacing: 0.6px;">Total Material Consumed</h6>
+            <h3 style="color: #1ea76d; font-weight: 800; margin-top: 0.5rem;">{{ total_material_consumed }}</h3>
         </div>
     </div>
     <div class="col-md-6 col-xl-3">
-        <div class="card p-3 text-center">
-            <h6>Total Material Consumed</h6>
-            <h3>{{ total_material_consumed }}</h3>
+        <div class="card p-3 text-center" style="background: linear-gradient(135deg, #fff8ee 0%, #ffffff 100%);">
+            <h6 class="text-uppercase" style="color: var(--muted); letter-spacing: 0.6px;">Total Material Remaining</h6>
+            <h3 style="color: var(--orange); font-weight: 800; margin-top: 0.5rem;">{{ total_material_remaining }}</h3>
         </div>
     </div>
     <div class="col-md-6 col-xl-3">
-        <div class="card p-3 text-center">
-            <h6>Total Material Remaining</h6>
-            <h3>{{ total_material_remaining }}</h3>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card p-3 text-center">
-            <h6>Total Expenses</h6>
-            <h3>₹{{ total_expenses }}</h3>
+        <div class="card p-3 text-center" style="background: linear-gradient(135deg, #fff0f0 0%, #ffffff 100%);">
+            <h6 class="text-uppercase" style="color: var(--muted); letter-spacing: 0.6px;">Total Expenses</h6>
+            <h3 style="color: #d63b3b; font-weight: 800; margin-top: 0.5rem;">₹{{ total_expenses }}</h3>
         </div>
     </div>
     <div class="col-12 mt-4">
         <div class="card p-3">
-            <h5>Daily Performance</h5>
+            <h5 style="color: var(--navy); font-weight: 700;">Daily Performance</h5>
             <canvas id="performanceChart" height="120"></canvas>
         </div>
     </div>
@@ -49,13 +56,27 @@ if (ctx) {
         data: {
             labels: chartData.labels,
             datasets: [
-                { label: 'RFC', data: chartData.rfc, backgroundColor: '#198754' },
-                { label: 'NG', data: chartData.ng, backgroundColor: '#0dcaf0' },
-                { label: 'TF', data: chartData.tf, backgroundColor: '#ffc107' },
-                { label: 'GI', data: chartData.gi, backgroundColor: '#dc3545' }
+                { label: 'RFC', data: chartData.rfc, backgroundColor: '#1ea76d' },
+                { label: 'NG', data: chartData.ng, backgroundColor: '#34c5ff' },
+                { label: 'TF', data: chartData.tf, backgroundColor: '#f7b233' },
+                { label: 'GI', data: chartData.gi, backgroundColor: '#d63b3b' }
             ]
         },
-        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        usePointStyle: true,
+                        pointStyle: 'circle'
+                    }
+                }
+            }
+        }
     });
 }
 </script>
