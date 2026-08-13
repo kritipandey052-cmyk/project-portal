@@ -4,7 +4,7 @@
 <div class="row gy-3">
     <div class="col-12 mb-3">
         <div class="card p-3">
-            <div class="d-flex align-items-center gap-3 mb-2">
+            <div class="d-flex align-items-center gap-3 mb-2 flex-wrap">
                 <img src="{% static 'portal/logo.svg' %}" alt="MEP DREAM CONSTRUCTION logo" style="width: 58px; height: 58px; border-radius: 14px; background: linear-gradient(135deg, #eef5ff 0%, #dfeeff 100%); padding: 8px; box-shadow: 0 8px 18px rgba(13,45,92,0.10);">
                 <div>
                     <h3 class="mb-1" style="color: var(--navy); font-weight: 800;">MEP DREAM CONSTRUCTION</h3>
@@ -41,7 +41,9 @@
     <div class="col-12 mt-4">
         <div class="card p-3">
             <h5 style="color: var(--navy); font-weight: 700;">Daily Performance</h5>
-            <canvas id="performanceChart" height="120"></canvas>
+            <div style="height: 260px;">
+                <canvas id="performanceChart" height="120"></canvas>
+            </div>
         </div>
     </div>
 </div>

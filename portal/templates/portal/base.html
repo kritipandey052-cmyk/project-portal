@@ -98,18 +98,18 @@
         }
 
         .navbar-brand {
-            font-size: 1.35rem;
-            font-weight: 800;
-            letter-spacing: 0.6px;
-            line-height: 1.2;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 0.7px;
+            line-height: 1.1;
             color: #ffffff !important;
             text-shadow: 0 2px 12px rgba(0,0,0,0.18);
         }
 
         .navbar-brand span {
             display: inline-block;
-            padding: 4px 10px;
-            border-radius: 10px;
+            padding: 6px 12px;
+            border-radius: 12px;
             background: linear-gradient(90deg, rgba(247,123,29,0.25), rgba(52,197,255,0.15));
         }
 
@@ -136,6 +136,103 @@
 
         .btn-outline-light {
             border-width: 2px;
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar {
+                padding: 0.75rem 0.75rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.15rem;
+                width: 100%;
+            }
+
+            .company-brand {
+                gap: 10px;
+                padding: 6px 8px;
+                width: 100%;
+            }
+
+            .company-logo {
+                width: 52px;
+                height: 52px;
+            }
+
+            .navbar-collapse {
+                width: 100%;
+            }
+
+            .container-fluid > .d-flex {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            body {
+                background: #f6f9fc;
+            }
+
+            .container-fluid.mt-4 {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+
+            .sidebar {
+                min-height: auto;
+                margin-bottom: 1rem;
+                padding: 1rem;
+            }
+
+            .sidebar .nav {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.5rem;
+            }
+
+            .sidebar a {
+                text-align: center;
+                padding: 0.75rem 0.5rem;
+                font-size: 0.85rem;
+            }
+
+            .navbar-brand span {
+                display: inline;
+                background: transparent;
+                padding: 0;
+            }
+
+            .navbar .container-fluid {
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+
+            .navbar .d-flex {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .company-brand {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .navbar-brand {
+                font-size: 0.9rem;
+                letter-spacing: 0.2px;
+            }
+
+            .sidebar .nav {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                width: auto;
+            }
         }
     </style>
 </head>
