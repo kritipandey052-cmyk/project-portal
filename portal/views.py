@@ -8,7 +8,8 @@ from openpyxl import Workbook
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from .models import MaterialIssue, MaterialConsumption, DPR, Expense
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 @login_required
 def dashboard(request):
@@ -165,3 +166,18 @@ def export_pdf(request):
     pdf.save()
     buffer.seek(0)
     return HttpResponse(buffer, content_type='application/pdf')
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('dashboard')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'registration/register.html', {
+        'form': form
+    })
